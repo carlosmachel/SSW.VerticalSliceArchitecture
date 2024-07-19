@@ -34,14 +34,14 @@ internal class CriarTarefaCommandHandler(AppDbContext dbContext)
 {
     public async Task<CriarTarefaResult> Handle(CriarTarefaCommand request, CancellationToken cancellationToken)
     {
-        var todo = new Tarefa
+        var tarefa = new Tarefa
         {
             Text = request.Text
         };
 
-        await dbContext.Tarefas.AddAsync(todo, cancellationToken);
+        await dbContext.Tarefas.AddAsync(tarefa, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);
 
-        return new CriarTarefaResult(todo.Id);
+        return new CriarTarefaResult(tarefa.Id);
     }
 }

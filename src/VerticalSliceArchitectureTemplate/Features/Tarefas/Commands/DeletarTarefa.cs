@@ -1,36 +1,44 @@
 ﻿
+using Carter;
+using MediatR;
+using VerticalSliceArchitectureTemplate.Common.CQRS;
+using VerticalSliceArchitectureTemplate.Features.Tarefas.Domain;
+
 namespace VerticalSliceArchitectureTemplate.Features.Tarefas.Commands;
 
-/*
-[Handler]
-public sealed partial class DeletarTarefa
+    
+public sealed record DeletarTarefaCommand(Guid Id) : ICommand<Unit>;
+
+public sealed partial class DeletarTarefa: ICarterModule
 {
-    public static void MapEndpoint(IEndpointRouteBuilder endpoints)
+    public void AddRoutes(IEndpointRouteBuilder app)
     {
-        endpoints.MapDelete("/tarefas/{id:guid}",
-                async ([FromRoute] Guid id, Handler handler, CancellationToken cancellationToken) =>
+        app.MapDelete("/tarefas/{id:guid}",
+                async ([FromRoute] Guid id, ISender sender, CancellationToken cancellationToken) =>
                 {
-                    await handler.HandleAsync(new Command(id), cancellationToken);
+                    await sender.Send(new DeletarTarefaCommand(id), cancellationToken);
                     return Results.NoContent();
                 })
+            .WithName("DeletarTarefa")
+            .WithSummary("DeletarTarefa")
+            .WithDescription("Deletar Tarefa")
             .Produces(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status404NotFound)
             .ProducesValidationProblem()
             .ProducesProblem(StatusCodes.Status500InternalServerError)
-            .WithTags(nameof(Todo));
-    }
-    
-    public sealed record Command(Guid Id);
-
-    private static async ValueTask HandleAsync(Command request, AppDbContext dbContext, CancellationToken cancellationToken)
-    {
-        var todo = await dbContext.Todos.FindAsync([request.Id], cancellationToken);
-
-        if (todo == null) throw new NotFoundException(nameof(Todo), request.Id);
-
-        dbContext.Todos.Remove(todo);
-
-        await dbContext.SaveChangesAsync(cancellationToken);
+            .WithTags(nameof(Tarefa));
     }
 }
-*/
+
+internal class DeletarTarefaCommandHandler(AppDbContext dbContext)
+    : ICommandHandler<DeletarTarefaCommand, Unit>
+{
+    public async Task<Unit> Handle(DeletarTarefaCommand request, CancellationToken cancellationToken)
+    {
+        var todo = await dbContext.Tarefas.FindAsync([request.Id], cancellationToken);
+        if (todo == null) throw new NotFoundException(nameof(Tarefas), request.Id);
+        dbContext.Tarefas.Remove(todo);
+        await dbContext.SaveChangesAsync(cancellationToken);
+        return Unit.Value;
+    }
+}
