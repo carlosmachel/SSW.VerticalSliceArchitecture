@@ -1,16 +1,22 @@
-﻿using VerticalSliceArchitectureTemplate.Features.Todos.Domain;
+﻿
 
-namespace VerticalSliceArchitectureTemplate.Features.Todos.Commands;
+namespace VerticalSliceArchitectureTemplate.Features.Tarefas.Commands;
 
-[Handler]
-public sealed partial class DeleteTodo : IEndpoint
+/*
+public sealed partial class AtualizarTarefa : ICarterModule
 {
-    public static void MapEndpoint(IEndpointRouteBuilder endpoints)
+    public sealed record Command(Guid Id, string Text);
+
+    public void AddRoutes(IEndpointRouteBuilder app)
     {
-        endpoints.MapDelete("/todos/{id:guid}",
-                async ([FromRoute] Guid id, Handler handler, CancellationToken cancellationToken) =>
+        app.MapPut("/todos/{id:guid}",
+                async (Guid id, Command command, ISender sender) =>
                 {
-                    await handler.HandleAsync(new Command(id), cancellationToken);
+                    var request = command with
+                    {
+                        Id = id // TODO: Remove this duplication
+                    };
+                    var result = await sender.Send(command);
                     return Results.NoContent();
                 })
             .Produces(StatusCodes.Status204NoContent)
@@ -20,16 +26,17 @@ public sealed partial class DeleteTodo : IEndpoint
             .WithTags(nameof(Todo));
     }
     
-    public sealed record Command(Guid Id);
-
     private static async ValueTask HandleAsync(Command request, AppDbContext dbContext, CancellationToken cancellationToken)
     {
         var todo = await dbContext.Todos.FindAsync([request.Id], cancellationToken);
 
         if (todo == null) throw new NotFoundException(nameof(Todo), request.Id);
 
-        dbContext.Todos.Remove(todo);
+        todo.Text = request.Text;
 
         await dbContext.SaveChangesAsync(cancellationToken);
     }
+
+    
 }
+*/

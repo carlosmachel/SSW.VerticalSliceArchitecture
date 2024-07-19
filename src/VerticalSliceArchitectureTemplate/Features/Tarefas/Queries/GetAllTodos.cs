@@ -1,9 +1,9 @@
-﻿using VerticalSliceArchitectureTemplate.Features.Todos.Domain;
+﻿
+namespace VerticalSliceArchitectureTemplate.Features.Tarefas.Queries;
 
-namespace VerticalSliceArchitectureTemplate.Features.Todos.Queries;
-
+/*
 [Handler]
-public sealed partial class GetAllTodos : IEndpoint
+public sealed partial class GetAllTodos
 {
     public static void MapEndpoint(IEndpointRouteBuilder endpoints)
     {
@@ -27,3 +27,4 @@ public sealed partial class GetAllTodos : IEndpoint
         return todos.AsReadOnly();
     }
 }
+*/

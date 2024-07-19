@@ -1,4 +1,5 @@
 using System.Reflection;
+using Carter;
 using VerticalSliceArchitectureTemplate;
 using VerticalSliceArchitectureTemplate.Host;
 
@@ -19,6 +20,7 @@ builder.Services.AddSwaggerGen( options =>
 builder.Services.AddMediatR(configure => configure.RegisterServicesFromAssemblyContaining<Program>());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCarter();
 
 builder.Services.AddExceptionHandler<ExceptionHandler.KnownExceptionsHandler>();
 
@@ -33,9 +35,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseProductionExceptionHandler();
-
-app.RegisterEndpoints(appAssembly);
-
+app.MapCarter();
 app.Run();
 
 public partial class Program;

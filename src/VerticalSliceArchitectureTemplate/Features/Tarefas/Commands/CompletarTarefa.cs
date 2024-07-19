@@ -1,14 +1,14 @@
-﻿using VerticalSliceArchitectureTemplate.Features.Todos.Domain;
+﻿
 
-namespace VerticalSliceArchitectureTemplate.Features.Todos.Commands;
+namespace VerticalSliceArchitectureTemplate.Features.Tarefas.Commands;
 
-
+/*
 [Handler]
-public sealed partial class CompleteTodo : IEndpoint
+public sealed partial class CompletarTarefa
 {
     public static void MapEndpoint(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPut("/todos/{id:guid}/complete",
+        endpoints.MapPut("/tarefas/{id:guid}/completar",
                 async ([FromRoute] Guid id, Handler handler, CancellationToken cancellationToken) =>
                 {
                     await handler.HandleAsync(new Command(id), cancellationToken);
@@ -32,3 +32,4 @@ public sealed partial class CompleteTodo : IEndpoint
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 }
+*/

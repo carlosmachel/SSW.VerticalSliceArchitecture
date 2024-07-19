@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using VerticalSliceArchitectureTemplate.Common.Domain;
-using VerticalSliceArchitectureTemplate.Features.Todos.Domain.Events;
+using VerticalSliceArchitectureTemplate.Features.Tarefas.Domain.Events;
 
-namespace VerticalSliceArchitectureTemplate.Features.Todos.Domain;
+namespace VerticalSliceArchitectureTemplate.Features.Tarefas.Domain;
 
-public class Todo : BaseEntity
+public class Tarefa : BaseEntity
 {
-    public Todo()
+    public Tarefa()
     {
-        StagedEvents.Add(new TodoCreatedEvent(Id));
+        StagedEvents.Add(new TarefaCriadaEvent(Id));
     }
     
     public Guid Id { get; init; }
@@ -27,6 +27,6 @@ public class Todo : BaseEntity
         
         IsCompleted = true;
     
-        StagedEvents.Add(new TodoCompletedEvent(Id));
+        StagedEvents.Add(new TarefaCompletadaEvent(Id));
     }
 }
