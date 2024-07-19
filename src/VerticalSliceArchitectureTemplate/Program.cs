@@ -1,6 +1,8 @@
 using System.Reflection;
 using Carter;
+using FluentValidation;
 using VerticalSliceArchitectureTemplate;
+using VerticalSliceArchitectureTemplate.Features.Tarefas.Domain;
 using VerticalSliceArchitectureTemplate.Host;
 
 var appAssembly = Assembly.GetExecutingAssembly();
@@ -17,6 +19,7 @@ builder.Services.AddSwaggerGen( options =>
     options.CustomSchemaIds(x => x.FullName?.Replace("+", ".", StringComparison.Ordinal));
 });
 
+builder.Services.AddValidatorsFromAssemblyContaining<TarefaValidator>();
 builder.Services.AddMediatR(configure => configure.RegisterServicesFromAssemblyContaining<Program>());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

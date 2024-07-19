@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using FluentValidation;
 using VerticalSliceArchitectureTemplate.Common.Domain;
 using VerticalSliceArchitectureTemplate.Features.Tarefas.Domain.Events;
 
@@ -13,8 +14,9 @@ public class Tarefa : BaseEntity
     
     public Guid Id { get; init; }
     
-    [MaxLength(1024)]
     public string Text { get; set; } = string.Empty;
+    public string Opcional { get; set; } = string.Empty;
+    
     public bool IsCompleted { get; private set; }
     
     /// <exception cref="InvalidOperationException">Throws when trying to complete an already completed item</exception>
@@ -24,9 +26,17 @@ public class Tarefa : BaseEntity
         {
             throw new InvalidOperationException("Todo is already completed");
         }
-        
+
         IsCompleted = true;
-    
         StagedEvents.Add(new TarefaCompletadaEvent(Id));
+    }
+}
+
+public class TarefaValidator : AbstractValidator<Tarefa> 
+{
+    public TarefaValidator()
+    {
+        RuleFor(tarefa => tarefa.Text).NotNull();
+        RuleFor(tarefa => tarefa.Opcional).NotNull().NotEmpty();
     }
 }

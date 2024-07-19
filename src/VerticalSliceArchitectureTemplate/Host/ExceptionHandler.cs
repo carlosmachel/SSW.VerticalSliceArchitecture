@@ -23,6 +23,7 @@ public static class ExceptionHandler
             new Dictionary<Type, Func<HttpContext, Exception, IResult>>
             {
                 { typeof(ValidationException), HandleValidationException },
+                { typeof(FluentValidation.ValidationException), HandleFluentValidationException },
                 { typeof(InvalidOperationException), HandleInvalidOperationException },
                 { typeof(NotFoundException), HandleNotFoundException }
             };
@@ -42,6 +43,15 @@ public static class ExceptionHandler
             return true;
         }
 
+        private static IResult HandleFluentValidationException(HttpContext context, Exception exception)
+        {
+            var validationException = exception as FluentValidation.ValidationException ??
+                                      throw new InvalidOperationException(
+                                          "Exception is not of type ValidationException");
+
+            return Results.BadRequest(validationException.Errors);
+        }
+        
         private static IResult HandleValidationException(HttpContext context, Exception exception)
         {
             var validationException = exception as ValidationException ??

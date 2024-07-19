@@ -1,4 +1,5 @@
 ﻿using Carter;
+using FluentValidation;
 using MediatR;
 using VerticalSliceArchitectureTemplate.Common.CQRS;
 using VerticalSliceArchitectureTemplate.Features.Tarefas.Domain;
@@ -29,7 +30,7 @@ public sealed partial class CriarTarefa : ICarterModule
     }
 }
 
-internal class CriarTarefaCommandHandler(AppDbContext dbContext)
+internal class CriarTarefaCommandHandler(AppDbContext dbContext, TarefaValidator validator)
     : ICommandHandler<CriarTarefaCommand, CriarTarefaResult>
 {
     public async Task<CriarTarefaResult> Handle(CriarTarefaCommand request, CancellationToken cancellationToken)
@@ -38,7 +39,7 @@ internal class CriarTarefaCommandHandler(AppDbContext dbContext)
         {
             Text = request.Text
         };
-
+        await validator.ValidateAndThrowAsync(tarefa, cancellationToken);
         await dbContext.Tarefas.AddAsync(tarefa, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);
 
