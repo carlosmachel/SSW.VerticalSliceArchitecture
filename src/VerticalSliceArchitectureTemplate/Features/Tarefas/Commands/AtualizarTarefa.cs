@@ -26,14 +26,6 @@ public sealed partial class AtualizarTarefa : ICarterModule
             .ProducesProblem(StatusCodes.Status500InternalServerError)
             .WithTags(nameof(Tarefa));
     }
-    
-    private static async ValueTask HandleAsync(AlterarTarefaCommand request, AppDbContext dbContext, CancellationToken cancellationToken)
-    {
-        var todo = await dbContext.Tarefas.FindAsync([request.Id], cancellationToken);
-        if (todo == null) throw new NotFoundException(nameof(Tarefas), request.Id);
-        todo.Text = request.Text;
-        await dbContext.SaveChangesAsync(cancellationToken);
-    }
 }
 
 internal class AlterarTarefaCommandHandler(AppDbContext dbContext) : ICommandHandler<AlterarTarefaCommand, Unit>

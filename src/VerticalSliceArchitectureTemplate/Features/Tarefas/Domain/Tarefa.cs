@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using FluentValidation;
+﻿using FluentValidation;
 using VerticalSliceArchitectureTemplate.Common.Domain;
 using VerticalSliceArchitectureTemplate.Features.Tarefas.Domain.Events;
 
