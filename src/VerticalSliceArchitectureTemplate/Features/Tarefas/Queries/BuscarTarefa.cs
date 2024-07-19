@@ -7,7 +7,7 @@ namespace VerticalSliceArchitectureTemplate.Features.Tarefas.Queries;
 
 public sealed record BuscarTarefaQuery(Guid Id) : IQuery<Tarefa>;
 
-public sealed partial class GetTodo : ICarterModule
+public sealed partial class BuscarTarefa : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
