@@ -2,8 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
 
-    <id>SSW.VerticalSliceArchitecture.Template</id>
-    <version>0.9.0</version>
+    <id>VerticalSliceArchitecture.POP.Template</id>
+    <version>0.0.1</version>
     <title>Vertical Slice Architecture Template</title>
     <authors>SSW Consulting</authors>
     <description>Vertical Slice Architecture template using ASP.NET Core</description>

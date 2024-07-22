@@ -10,9 +10,9 @@
     ],
     "name": "Vertical Slice Architecture Solution",
     "description": "Creates a new Vertical Slice Architecture Solution",
-    "identity": "SSW.VerticalSliceArchitecture.Solution.CSharp",
-    "groupIdentity": "SSW.VerticalSliceArchitecture.Solution",
-    "shortName": "ssw-vsa",
+    "identity": "VerticalSliceArchitecture.POP.Solution.CSharp",
+    "groupIdentity": "SSW.VerticalSliceArchitecture.POP.Solution",
+    "shortName": "vsa-pop",
     "tags": {
       "language": "C#",
       "type": "project"

@@ -10,14 +10,14 @@
   ],
   "name": "Vertical Slice",
   "description":  "Create a new full vertical slice",
-  "identity": "SSW.VerticalSliceArchitecture.Slice.CSharp",
-  "groupIdentity": "SSW.VerticalSliceArchitecture.Slice",
-  "shortName": "ssw-vsa-slice",
+  "identity": "VerticalSliceArchitecture.POP.Slice.CSharp",
+  "groupIdentity": "VerticalSliceArchitecture.POP.Slice",
+  "shortName": "vsa-pop-slice",
   "tags": {
     "language": "C#",
     "type": "item"
   },
-  "sourceName": "Todo",
+  "sourceName": "Tarefa",
   "preferNameDirectory": false,
   "symbols": {
     "DefaultNamespace": {
@@ -30,13 +30,13 @@
       "type": "parameter",
       "datatype": "string",
       "isRequired": false,
-      "replaces": "Todos",
-      "fileRename": "Todos"
+      "replaces": "Tarefas",
+      "fileRename": "Tarefas"
     },
     "featureNamePluralDefault": {
       "type": "computed",
       "value": "featureNamePlural && featureNamePlural !== '' ? featureNamePlural : featureName + 's'",
-      "replaces": "Todos"
+      "replaces": "Tarefas"
     },
     "tempFirstPluralCamel": {
       "type": "derived",
@@ -51,8 +51,8 @@
     "featureNamePluralCamel": {
       "type": "generated",
       "generator": "join",
-      "replaces": "todos",
-      "fileRename": "todos",
+      "replaces": "tarefas",
+      "fileRename": "tarefas",
       "parameters": {
         "symbols": [
           {
@@ -70,8 +70,8 @@
       "type": "parameter",
       "datatype": "string",
       "isRequired": true,
-      "replaces": "Todo",
-      "fileRename": "Todo"
+      "replaces": "Tarefa",
+      "fileRename": "Tarefa"
     },
     "tempFirstCamel": {
       "type": "derived",
@@ -86,8 +86,8 @@
     "featureNameCamel": {
       "type": "generated",
       "generator": "join",
-      "replaces": "todo",
-      "fileRename": "todo",
+      "replaces": "tarefa",
+      "fileRename": "tarefa",
       "parameters": {
         "symbols": [
           {
